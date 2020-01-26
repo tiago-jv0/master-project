@@ -38,7 +38,7 @@ class Directory extends Component {
                     size: 'large',
                     id: 5,
                     linkUrl: 'shop/mens',
-                },
+                },  
             ],
         };
     }
