@@ -43,7 +43,6 @@ class App extends Component {
 
     render() {
         const { currentUser } = this.props;
-
         return (
             <div className="App">
                 <Header></Header>
@@ -51,7 +50,6 @@ class App extends Component {
                     <Route exact path="/" component={HomePage} />
                     <Route path="/shop" component={ShopPage} />
                     <Route exact path="/checkout" component={CheckoutPage} />
-
                     <Route
                         exact
                         path="/signIn"
