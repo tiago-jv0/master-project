@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './CollectionPage.scss';
+import { CollectionPageContainer, CollectionTitle, CollectionItemsContainer } from './CollectionPageStyles';
 
 import { connect } from 'react-redux';
 
@@ -11,14 +11,14 @@ const CollectionPage = ({ collection }) => {
     const { title, items } = collection;
 
     return (
-        <div className="collection-page">
-            <h2 className="title"> {title.toUpperCase()}</h2>
-            <div className="items">
+        <CollectionPageContainer>
+            <CollectionTitle> {title.toUpperCase()}</CollectionTitle>
+            <CollectionItemsContainer>
                 {items.map((item) => {
                     return <CollectionItem key={item.id} item={item}></CollectionItem>;
                 })}
-            </div>
-        </div>
+            </CollectionItemsContainer>
+        </CollectionPageContainer>
     );
 };
 

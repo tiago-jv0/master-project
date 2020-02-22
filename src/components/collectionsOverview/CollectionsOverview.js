@@ -1,7 +1,5 @@
 import React from 'react';
 
-import './CollectionsOverview.scss';
-
 import CollectionPreview from '../../components/collectionPreview/CollectionPreview';
 
 import { selectCollectionsForPreview } from '../../redux/selectors/shopSelectors';
@@ -9,14 +7,15 @@ import { selectCollectionsForPreview } from '../../redux/selectors/shopSelectors
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
+import { CollectionsOverviewContainer } from './ColectionsOverviewStyles';
+
 const CollectionsOverview = ({ collections }) => {
     return (
-
-<div className="collections-overview">
+        <CollectionsOverviewContainer>
             {collections.map(({ id, ...otherCollectionProps }) => {
                 return <CollectionPreview key={id} {...otherCollectionProps}></CollectionPreview>;
             })}
-        </div>
+        </CollectionsOverviewContainer>
     );
 };
 
