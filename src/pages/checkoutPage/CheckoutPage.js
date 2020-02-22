@@ -52,7 +52,7 @@ const CheckoutPage = ({ cartItems, total }) => {
                 4242 4242 4242 4242 - Exp : 01/20 - CVV: 123
             </WarningContainer>
 
-            <StripeButton></StripeButton>
+            <StripeButton price={total}></StripeButton>
         </CheckoutPageContainer>
     );
 };
