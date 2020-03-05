@@ -4,13 +4,22 @@ import { Route } from 'react-router-dom';
 import CollectionsOverview from '../../components/collectionsOverview/CollectionsOverview';
 import CollectionPage from '../collectionPage/CollectionPage';
 
+import WithSpinner from '../../components/with-spinner/WithSpinner';
+
 import { firestore, convertCollectionsSnapshotToMap } from '../../firebase/firebase.utils';
 
 import { connect } from 'react-redux';
 
 import { updateCollections } from '../../redux/actions/shopActions';
 
+const CollectionsOverviewWithSpinner = WithSpinner(CollectionsOverview);
+const CollectionPageWithSpinner = WithSpinner(CollectionPage);
+
 export class ShopPage extends Component {
+    state = {
+        loading: true,
+    };
+
     unsubscribeFromSnapshot = null;
 
     componentDidMount() {
@@ -18,19 +27,31 @@ export class ShopPage extends Component {
 
         const collectionRef = firestore.collection('collections');
 
-        collectionRef.onSnapshot(async (snapshot) => {
+        collectionRef.get().then((snapshot) => {
             const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
             updateCollections(collectionsMap);
+            this.setState({ loading: false });
         });
     }
     render() {
         const { match } = this.props;
-
+        const { loading } = this.state;
         return (
             <div className="shop-page">
-                <Route exact path={`${match.path}`} component={CollectionsOverview} />
+                <Route
+                    exact
+                    path={`${match.path}`}
+                    render={(props) => (
+                        <CollectionsOverviewWithSpinner isLoading={loading} {...props}></CollectionsOverviewWithSpinner>
+                    )}
+                />
 
-                <Route path={`${match.path}/:collectionId`} component={CollectionPage} />
+                <Route
+                    path={`${match.path}/:collectionId`}
+                    render={(props) => (
+                        <CollectionPageWithSpinner isLoading={loading} {...props}></CollectionPageWithSpinner>
+                    )}
+                />
             </div>
         );
     }
