@@ -1,4 +1,4 @@
-import { all, call, takeLatest, put } from 'redux-saga';
+import { all, call, takeLatest, put } from 'redux-saga/effects';
 
 import UserActionTypes from '../types/userTypes';
 import { clearCart } from '../actions/cartActions';
